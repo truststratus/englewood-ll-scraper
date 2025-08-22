@@ -2,10 +2,9 @@ name: Daily snapshots
 
 on:
   schedule:
-    - cron: "23 9 * * *"   # daily at 09:23 UTC (~5:23am ET). Change if you want.
-  workflow_dispatch:        # allows manual "Run workflow" from the Actions tab
+    - cron: "23 9 * * *"   # daily at 09:23 UTC (~5:23am ET)
+  workflow_dispatch:
 
-# Let this workflow push commits back to the repo
 permissions:
   contents: write
 
@@ -17,7 +16,9 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          persist-credentials: true   # use GITHUB_TOKEN for pushing
+          # fetch full history so we can rebase/push cleanly
+          fetch-depth: 0
+          persist-credentials: true
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -30,14 +31,33 @@ jobs:
       - name: Run snapshot crawler
         run: npm run snapshot
 
+      # --- Git plumbing to avoid non-fast-forward errors ---
+      - name: Configure git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Rebase on latest branch tip
+        env:
+          BRANCH: ${{ github.ref_name }}
+        run: |
+          # Ensure we're on the correct branch (e.g., main)
+          git checkout "$BRANCH"
+          # Pull latest remote commits and rebase our changes on top
+          git pull --rebase origin "$BRANCH"
+
       - name: Commit snapshot changes (if any)
         run: |
           if [[ -n $(git status --porcelain snapshots) ]]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add snapshots
-            git commit -m "Daily site snapshots"
-            git push
+            git commit -m "Daily site snapshots" || echo "Nothing to commit."
           else
-            echo "No changes."
+            echo "No snapshot changes."
           fi
+
+      - name: Push
+        env:
+          BRANCH: ${{ github.ref_name }}
+        run: |
+          # Push (fast-forward). If another run raced us, the next run will rebase again.
+          git push origin "$BRANCH"
