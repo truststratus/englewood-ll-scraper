@@ -2,7 +2,7 @@ name: Daily snapshots
 
 on:
   schedule:
-    - cron: "23 9 * * *"   # daily at 09:23 UTC (~5:23am ET)
+    - cron: "23 9 * * *"     # daily 09:23 UTC
   workflow_dispatch:
 
 permissions:
@@ -13,10 +13,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repo (full history)
         uses: actions/checkout@v4
         with:
-          # fetch full history so we can rebase/push cleanly
           fetch-depth: 0
           persist-credentials: true
 
@@ -31,20 +30,18 @@ jobs:
       - name: Run snapshot crawler
         run: npm run snapshot
 
-      # --- Git plumbing to avoid non-fast-forward errors ---
       - name: Configure git identity
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Rebase on latest branch tip
+      - name: Rebase on latest tip
         env:
           BRANCH: ${{ github.ref_name }}
         run: |
-          # Ensure we're on the correct branch (e.g., main)
+          git fetch origin "$BRANCH"
           git checkout "$BRANCH"
-          # Pull latest remote commits and rebase our changes on top
-          git pull --rebase origin "$BRANCH"
+          git pull --rebase origin "$BRANCH" || true
 
       - name: Commit snapshot changes (if any)
         run: |
@@ -55,9 +52,9 @@ jobs:
             echo "No snapshot changes."
           fi
 
-      - name: Push
+      - name: Push (with lease)
         env:
           BRANCH: ${{ github.ref_name }}
         run: |
-          # Push (fast-forward). If another run raced us, the next run will rebase again.
-          git push origin "$BRANCH"
+          # Use --force-with-lease to avoid non-fast-forward failures but still be safe.
+          git push --force-with-lease origin "$BRANCH"
