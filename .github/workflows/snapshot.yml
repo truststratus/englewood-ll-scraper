@@ -1,0 +1,28 @@
+name: Daily snapshots
+on:
+  schedule:
+    - cron: "23 9 * * *"   # daily at 9:23 UTC (~5:23am ET)
+  workflow_dispatch:
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { persist-credentials: true }
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: npm ci || npm i
+      - run: npm run snapshot
+      - name: Commit snapshot changes (if any)
+        run: |
+          if [[ -n $(git status --porcelain snapshots) ]]; then
+            git config user.name "EnglewoodLL Bot"
+            git config user.email "bot@englewoodlittleleague.com"
+            git add snapshots
+            git commit -m "Daily site snapshots"
+            git push
+          else
+            echo "No changes."
+          fi
