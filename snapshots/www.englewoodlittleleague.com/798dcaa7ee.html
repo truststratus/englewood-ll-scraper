@@ -446,6 +446,10 @@ Sys.WebForms.PageRequestManager._initialize('ScriptManager', 'Form', [], [], [],
             document.querySelector('a[id*="hypPrivacy"]') ||
             document.querySelector('a[id*="hypTerms"]') ||
             document.querySelector("[id$='lblCopyright']");
+       
+	    if (!login || !source) {
+			return;
+		}
 
         // Get actual theme color
         var color = window.getComputedStyle(source).color;
@@ -516,6 +520,10 @@ Sys.WebForms.PageRequestManager._initialize('ScriptManager', 'Form', [], [], [],
             document.querySelector('a[id*="hypPrivacy"]') ||
             document.querySelector('a[id*="hypTerms"]') ||
             document.querySelector("[id$='lblCopyright']");
+       
+	    if (!login || !source) {
+			return;
+		}
 
         // Get actual theme color
         var color = window.getComputedStyle(source).color;
@@ -871,7 +879,7 @@ PICTURES ARE Saturday April 18th, 2026<br />
 <h2 class="club-name">Englewood Little League (Ohio)</h2>
 <p class="club-address">Mike Stoffel (Information VP) 937-478-3697 321 Union Boulevard (MAILING ADDRESS:P.O. Box 323) Englewood  Ohio45322&nbsp;<br />&nbsp;&nbsp;&nbsp;<br/>
 	Phone : <a href="tel:937-478-3697">937-478-3697</a><br/>
-	<a class="club-email" href="/cdn-cgi/l/email-protection#d9bcb5b5bbb8aabcbbb8b5b599b4aab7f7bab6b4"><span class="__cf_email__" data-cfemail="41242d2d2320322423202d2d012c322f6f222e2c">[email&#160;protected]</span></a>
+	<a class="club-email" href="/cdn-cgi/l/email-protection#bcd9d0d0deddcfd9deddd0d0fcd1cfd292dfd3d1"><span class="__cf_email__" data-cfemail="c3a6afafa1a2b0a6a1a2afaf83aeb0adeda0acae">[email&#160;protected]</span></a>
 </p>
 
 							<div class="clear-both"></div>
@@ -909,6 +917,10 @@ PICTURES ARE Saturday April 18th, 2026<br />
             document.querySelector('a[id*="hypPrivacy"]') ||
             document.querySelector('a[id*="hypTerms"]') ||
             document.querySelector("[id$='lblCopyright']");
+       
+	    if (!login || !source) {
+			return;
+		}
 
         // Get actual theme color
         var color = window.getComputedStyle(source).color;

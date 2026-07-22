@@ -446,6 +446,10 @@ Sys.WebForms.PageRequestManager._initialize('ScriptManager', 'Form', [], [], [],
             document.querySelector('a[id*="hypPrivacy"]') ||
             document.querySelector('a[id*="hypTerms"]') ||
             document.querySelector("[id$='lblCopyright']");
+       
+	    if (!login || !source) {
+			return;
+		}
 
         // Get actual theme color
         var color = window.getComputedStyle(source).color;
@@ -516,6 +520,10 @@ Sys.WebForms.PageRequestManager._initialize('ScriptManager', 'Form', [], [], [],
             document.querySelector('a[id*="hypPrivacy"]') ||
             document.querySelector('a[id*="hypTerms"]') ||
             document.querySelector("[id$='lblCopyright']");
+       
+	    if (!login || !source) {
+			return;
+		}
 
         // Get actual theme color
         var color = window.getComputedStyle(source).color;
@@ -869,7 +877,7 @@ if (!menu) return;
 <h2 class="club-name">Englewood Little League (Ohio)</h2>
 <p class="club-address">Mike Stoffel (Information VP) 937-478-3697 321 Union Boulevard (MAILING ADDRESS:P.O. Box 323) Englewood  Ohio45322&nbsp;<br />&nbsp;&nbsp;&nbsp;<br/>
 	Phone : <a href="tel:937-478-3697">937-478-3697</a><br/>
-	<a class="club-email" href="/cdn-cgi/l/email-protection#97f2fbfbf5f6e4f2f5f6fbfbd7fae4f9b9f4f8fa"><span class="__cf_email__" data-cfemail="30555c5c5251435552515c5c705d435e1e535f5d">[email&#160;protected]</span></a>
+	<a class="club-email" href="/cdn-cgi/l/email-protection#6c0900000e0d1f090e0d00002c011f02420f0301"><span class="__cf_email__" data-cfemail="bbded7d7d9dac8ded9dad7d7fbd6c8d595d8d4d6">[email&#160;protected]</span></a>
 </p>
 
 							<div class="clear-both"></div>
@@ -907,6 +915,10 @@ if (!menu) return;
             document.querySelector('a[id*="hypPrivacy"]') ||
             document.querySelector('a[id*="hypTerms"]') ||
             document.querySelector("[id$='lblCopyright']");
+       
+	    if (!login || !source) {
+			return;
+		}
 
         // Get actual theme color
         var color = window.getComputedStyle(source).color;

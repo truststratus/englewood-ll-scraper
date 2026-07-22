@@ -446,6 +446,10 @@ Sys.WebForms.PageRequestManager._initialize('ScriptManager', 'Form', [], [], [],
             document.querySelector('a[id*="hypPrivacy"]') ||
             document.querySelector('a[id*="hypTerms"]') ||
             document.querySelector("[id$='lblCopyright']");
+       
+	    if (!login || !source) {
+			return;
+		}
 
         // Get actual theme color
         var color = window.getComputedStyle(source).color;
@@ -516,6 +520,10 @@ Sys.WebForms.PageRequestManager._initialize('ScriptManager', 'Form', [], [], [],
             document.querySelector('a[id*="hypPrivacy"]') ||
             document.querySelector('a[id*="hypTerms"]') ||
             document.querySelector("[id$='lblCopyright']");
+       
+	    if (!login || !source) {
+			return;
+		}
 
         // Get actual theme color
         var color = window.getComputedStyle(source).color;
@@ -913,7 +921,7 @@ if (!menu) return;
 <h2 class="club-name">Englewood Little League (Ohio)</h2>
 <p class="club-address">Mike Stoffel (Information VP) 937-478-3697 321 Union Boulevard (MAILING ADDRESS:P.O. Box 323) Englewood  Ohio45322&nbsp;<br />&nbsp;&nbsp;&nbsp;<br/>
 	Phone : <a href="tel:937-478-3697">937-478-3697</a><br/>
-	<a class="club-email" href="/cdn-cgi/l/email-protection#e2878e8e8083918780838e8ea28f918ccc818d8f"><span class="__cf_email__" data-cfemail="c5a0a9a9a7a4b6a0a7a4a9a985a8b6abeba6aaa8">[email&#160;protected]</span></a>
+	<a class="club-email" href="/cdn-cgi/l/email-protection#6e0b02020c0f1d0b0c0f02022e031d00400d0103"><span class="__cf_email__" data-cfemail="17727b7b7576647275767b7b577a64793974787a">[email&#160;protected]</span></a>
 </p>
 
 							<div class="clear-both"></div>
@@ -951,6 +959,10 @@ if (!menu) return;
             document.querySelector('a[id*="hypPrivacy"]') ||
             document.querySelector('a[id*="hypTerms"]') ||
             document.querySelector("[id$='lblCopyright']");
+       
+	    if (!login || !source) {
+			return;
+		}
 
         // Get actual theme color
         var color = window.getComputedStyle(source).color;
@@ -995,7 +1007,7 @@ window.__TsmHiddenField = $get('ScriptManager_TSM');;(function() {
     
 
 
-<!-- sports - 10.0.8.48 -->
+<!-- sports - 10.0.1.43 -->
 
 <script type="text/javascript">
 $(window).load(function(){
